@@ -28,7 +28,7 @@ data class ConnectParams(
 
 @Serializable
 data class ClientInfo(
-    val id: String = "android-node",
+    val id: String = "billbot-android",
     val version: String,
     val platform: String = "android",
     val mode: String = "node"
