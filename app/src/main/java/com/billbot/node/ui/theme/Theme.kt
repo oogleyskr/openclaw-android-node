@@ -1,4 +1,4 @@
-package com.openclaw.node.ui.theme
+package com.billbot.node.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -28,7 +28,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun OpenClawNodeTheme(
+fun BillBotNodeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit

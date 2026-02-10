@@ -1,4 +1,4 @@
-package com.openclaw.node.models
+package com.billbot.node.models
 
 import kotlinx.serialization.Serializable
 

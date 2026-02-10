@@ -1,4 +1,4 @@
-package com.openclaw.node.services
+package com.billbot.node.services
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -92,7 +92,7 @@ class ScreenCaptureService : Service() {
                 "Screen Capture",
                 NotificationManager.IMPORTANCE_LOW
             ).apply {
-                description = "OpenClaw Node screen capture service"
+                description = "BillBot Node screen capture service"
             }
             
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -127,7 +127,7 @@ class ScreenCaptureService : Service() {
     
     private fun setupVirtualDisplay() {
         virtualDisplay = mediaProjection?.createVirtualDisplay(
-            "OpenClawCapture",
+            "BillBotCapture",
             screenWidth,
             screenHeight,
             screenDensity,
@@ -224,7 +224,7 @@ class ScreenCaptureService : Service() {
     private fun createNotification(): Notification {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Notification.Builder(this, CHANNEL_ID)
-                .setContentTitle("OpenClaw Node")
+                .setContentTitle("BillBot Node")
                 .setContentText("Screen capture active")
                 .setSmallIcon(android.R.drawable.ic_menu_camera)
                 .setOngoing(true)
@@ -232,7 +232,7 @@ class ScreenCaptureService : Service() {
         } else {
             @Suppress("DEPRECATION")
             Notification.Builder(this)
-                .setContentTitle("OpenClaw Node")
+                .setContentTitle("BillBot Node")
                 .setContentText("Screen capture active")
                 .setSmallIcon(android.R.drawable.ic_menu_camera)
                 .setOngoing(true)

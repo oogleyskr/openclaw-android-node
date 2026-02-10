@@ -1,4 +1,4 @@
-package com.openclaw.node
+package com.billbot.node
 
 import android.content.Intent
 import android.net.Uri
@@ -19,9 +19,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.openclaw.node.services.NodeConnectionService
-import com.openclaw.node.ui.theme.OpenClawNodeTheme
-import com.openclaw.node.ui.MainViewModel
+import com.billbot.node.services.NodeConnectionService
+import com.billbot.node.ui.theme.BillBotNodeTheme
+import com.billbot.node.ui.MainViewModel
 
 class MainActivity : ComponentActivity() {
     
@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
             val data = result.data
             if (data != null) {
                 // Start screen capture service with permission
-                val intent = Intent(this, com.openclaw.node.services.ScreenCaptureService::class.java)
+                val intent = Intent(this, com.billbot.node.services.ScreenCaptureService::class.java)
                 intent.putExtra("resultCode", result.resultCode)
                 intent.putExtra("data", data)
                 startForegroundService(intent)
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         
         setContent {
-            OpenClawNodeTheme {
+            BillBotNodeTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -95,7 +95,7 @@ fun MainScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            text = "OpenClaw Node",
+            text = "BillBot Node",
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold
         )

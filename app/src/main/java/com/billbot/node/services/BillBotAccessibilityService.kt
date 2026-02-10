@@ -1,4 +1,4 @@
-package com.openclaw.node.services
+package com.billbot.node.services
 
 import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.GestureDescription
@@ -6,16 +6,16 @@ import android.graphics.Path
 import android.graphics.Rect
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
-import com.openclaw.node.models.UINode
-import com.openclaw.node.models.Bounds
+import com.billbot.node.models.UINode
+import com.billbot.node.models.Bounds
 import kotlinx.coroutines.CompletableDeferred
 
-class OpenClawAccessibilityService : AccessibilityService() {
+class BillBotAccessibilityService : AccessibilityService() {
     
     companion object {
-        private var instance: OpenClawAccessibilityService? = null
+        private var instance: BillBotAccessibilityService? = null
         
-        fun getInstance(): OpenClawAccessibilityService? = instance
+        fun getInstance(): BillBotAccessibilityService? = instance
         
         fun isServiceEnabled(): Boolean = instance != null
     }

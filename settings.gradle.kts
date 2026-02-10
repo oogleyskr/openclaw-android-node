@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "OpenClaw Node"
+rootProject.name = "BillBot Node"
 include(":app")

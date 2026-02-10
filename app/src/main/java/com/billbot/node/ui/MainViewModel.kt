@@ -1,11 +1,11 @@
-package com.openclaw.node.ui
+package com.billbot.node.ui
 
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.openclaw.node.services.NodeConnectionService
-import com.openclaw.node.utils.PreferencesManager
+import com.billbot.node.services.NodeConnectionService
+import com.billbot.node.utils.PreferencesManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

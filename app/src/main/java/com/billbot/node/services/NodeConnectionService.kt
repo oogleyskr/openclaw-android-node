@@ -1,4 +1,4 @@
-package com.openclaw.node.services
+package com.billbot.node.services
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -9,9 +9,9 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
-import com.openclaw.node.models.*
-import com.openclaw.node.utils.CryptoUtils
-import com.openclaw.node.utils.PreferencesManager
+import com.billbot.node.models.*
+import com.billbot.node.utils.CryptoUtils
+import com.billbot.node.utils.PreferencesManager
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -104,7 +104,7 @@ class NodeConnectionService : Service() {
                 "Node Connection",
                 NotificationManager.IMPORTANCE_LOW
             ).apply {
-                description = "OpenClaw Node gateway connection"
+                description = "BillBot Node gateway connection"
             }
             
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -165,7 +165,7 @@ class NodeConnectionService : Service() {
     }
     
     private suspend fun buildConnectRequest(
-        settings: com.openclaw.node.utils.NodeSettings,
+        settings: com.billbot.node.utils.NodeSettings,
         deviceInfo: DeviceInfo,
         challengeText: String
     ): ConnectRequest {
@@ -186,13 +186,13 @@ class NodeConnectionService : Service() {
                     "launch"
                 ),
                 permissions = mapOf(
-                    "accessibility" to OpenClawAccessibilityService.isServiceEnabled(),
+                    "accessibility" to BillBotAccessibilityService.isServiceEnabled(),
                     "screen.capture" to ScreenCaptureService.isServiceRunning()
                 ),
                 auth = if (settings.gatewayToken.isNotEmpty()) {
                     AuthInfo(token = settings.gatewayToken)
                 } else null,
-                userAgent = "openclaw-android/1.0.0",
+                userAgent = "billbot-android/1.0.0",
                 device = deviceInfo
             )
         )
@@ -314,23 +314,23 @@ class NodeConnectionService : Service() {
     }
     
     private fun getUITree(): List<UINode> {
-        return OpenClawAccessibilityService.getInstance()?.getUITree() ?: emptyList()
+        return BillBotAccessibilityService.getInstance()?.getUITree() ?: emptyList()
     }
     
     private suspend fun performTap(x: Float, y: Float): Boolean {
-        return OpenClawAccessibilityService.getInstance()?.performTap(x, y) ?: false
+        return BillBotAccessibilityService.getInstance()?.performTap(x, y) ?: false
     }
     
     private suspend fun performSwipe(x1: Float, y1: Float, x2: Float, y2: Float, duration: Long): Boolean {
-        return OpenClawAccessibilityService.getInstance()?.performSwipe(x1, y1, x2, y2, duration) ?: false
+        return BillBotAccessibilityService.getInstance()?.performSwipe(x1, y1, x2, y2, duration) ?: false
     }
     
     private fun performType(text: String): Boolean {
-        return OpenClawAccessibilityService.getInstance()?.performType(text) ?: false
+        return BillBotAccessibilityService.getInstance()?.performType(text) ?: false
     }
     
     private fun performPress(key: String): Boolean {
-        val accessibilityService = OpenClawAccessibilityService.getInstance() ?: return false
+        val accessibilityService = BillBotAccessibilityService.getInstance() ?: return false
         return when (key) {
             "back" -> accessibilityService.performBack()
             "home" -> accessibilityService.performHome()
@@ -366,7 +366,7 @@ class NodeConnectionService : Service() {
     private fun createNotification(): Notification {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Notification.Builder(this, CHANNEL_ID)
-                .setContentTitle("OpenClaw Node")
+                .setContentTitle("BillBot Node")
                 .setContentText(if (isConnected) "Connected to gateway" else "Connecting to gateway")
                 .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
                 .setOngoing(true)
@@ -374,7 +374,7 @@ class NodeConnectionService : Service() {
         } else {
             @Suppress("DEPRECATION")
             Notification.Builder(this)
-                .setContentTitle("OpenClaw Node")
+                .setContentTitle("BillBot Node")
                 .setContentText(if (isConnected) "Connected to gateway" else "Connecting to gateway")
                 .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
                 .setOngoing(true)

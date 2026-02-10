@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.openclaw.node"
+    namespace = "com.billbot.node"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.openclaw.node"
+        applicationId = "com.billbot.node"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

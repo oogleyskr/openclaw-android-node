@@ -20,8 +20,8 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-# Keep OpenClaw node protocol models
--keep class com.openclaw.node.models.** { *; }
+# Keep BillBot node protocol models
+-keep class com.billbot.node.models.** { *; }
 
 # Keep Kotlinx serialization
 -keepclassmembers class kotlinx.serialization.json.** {
@@ -30,11 +30,11 @@
 -keepclasseswithmembers class kotlinx.serialization.** {
     kotlinx.serialization.KSerializer serializer(...);
 }
--keep,includedescriptorclasses class com.openclaw.node.**$$serializer { *; }
--keepclassmembers class com.openclaw.node.** {
+-keep,includedescriptorclasses class com.billbot.node.**$$serializer { *; }
+-keepclassmembers class com.billbot.node.** {
     *** Companion;
 }
--keepclasseswithmembers class com.openclaw.node.** {
+-keepclasseswithmembers class com.billbot.node.** {
     kotlinx.serialization.KSerializer serializer(...);
 }
 

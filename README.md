@@ -1,12 +1,12 @@
-# OpenClaw Android Node
+# BillBot Android Node
 
-An Android app that enables LLM control of Android devices through the OpenClaw gateway. This node connects to an OpenClaw gateway via WebSocket and exposes device capabilities like screen capture, UI interaction, and app launching.
+An Android app that enables LLM control of Android devices through the BillBot gateway. This node connects to a BillBot gateway via WebSocket and exposes device capabilities like screen capture, UI interaction, and app launching.
 
 ## Features
 
 - **Accessibility Service**: Read UI hierarchy and inject touch events
 - **Screen Capture**: Take screenshots using MediaProjection API
-- **WebSocket Connection**: Connect to OpenClaw gateway as a node
+- **WebSocket Connection**: Connect to BillBot gateway as a node
 - **Device Control**: Support for tap, swipe, type, press, and launch commands
 - **Secure Authentication**: RSA key-based device identity and signing
 
@@ -25,7 +25,7 @@ An Android app that enables LLM control of Android devices through the OpenClaw 
 ## Requirements
 
 - Android 8.0 (API level 26) or higher
-- OpenClaw Gateway running on accessible network
+- BillBot Gateway running on accessible network
 - Device permissions for:
   - Accessibility Service (for UI control)
   - Screen Capture (for screenshots)
@@ -36,14 +36,13 @@ An Android app that enables LLM control of Android devices through the OpenClaw 
 ### 1. Build and Install
 
 ```bash
-cd ~/projects/openclaw-android-node
 ./gradlew assembleDebug
 adb install app/build/outputs/apk/debug/app-debug.apk
 ```
 
 ### 2. Configure Gateway Connection
 
-1. Open the OpenClaw Node app
+1. Open the BillBot Node app
 2. Enter your Gateway host (IP address)
 3. Enter Gateway port (default: 18789)
 4. Enter Gateway token if authentication is required
@@ -54,7 +53,7 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 
 #### Accessibility Service
 1. Tap "Enable Accessibility Service"
-2. Find "OpenClaw Node" in the accessibility services list
+2. Find "BillBot Node" in the accessibility services list
 3. Enable the service
 4. Accept the permission dialog
 
@@ -67,16 +66,16 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 
 1. Tap "Connect" to establish WebSocket connection
 2. Wait for "Connected" status
-3. Check OpenClaw gateway logs for node pairing request
-4. Approve the node from gateway CLI: `openclaw nodes approve <requestId>`
+3. Check BillBot gateway logs for node pairing request
+4. Approve the node from gateway CLI: `billbot nodes approve <requestId>`
 
 ### 5. Verify Connection
 
-From your OpenClaw gateway, verify the node is connected:
+From your BillBot gateway, verify the node is connected:
 
 ```bash
-openclaw nodes status
-openclaw nodes describe --node "Android Node"
+billbot nodes status
+billbot nodes describe --node "Android Node"
 ```
 
 ## Development
@@ -93,12 +92,12 @@ openclaw nodes describe --node "Android Node"
 ### Project Structure
 
 ```
-app/src/main/java/com/openclaw/node/
+app/src/main/java/com/billbot/node/
 ├── MainActivity.kt                 # Main UI activity
 ├── models/                         # Data models
-│   └── Protocol.kt                 # OpenClaw protocol models
+│   └── Protocol.kt                 # Protocol models
 ├── services/                       # Background services
-│   ├── OpenClawAccessibilityService.kt  # UI interaction
+│   ├── BillBotAccessibilityService.kt   # UI interaction
 │   ├── ScreenCaptureService.kt          # Screen capture
 │   └── NodeConnectionService.kt         # WebSocket connection
 ├── ui/                            # UI components
@@ -109,34 +108,14 @@ app/src/main/java/com/openclaw/node/
     └── CryptoUtils.kt            # Device identity & signing
 ```
 
-### OpenClaw Protocol
+### Protocol
 
-The node implements the OpenClaw WebSocket protocol v3:
+The node implements the WebSocket protocol v3:
 
 1. **Handshake**: Connect with device identity and capabilities
-2. **Authentication**: RSA signature-based device verification  
+2. **Authentication**: RSA signature-based device verification
 3. **Command Processing**: Handle incoming RPC requests
 4. **Response**: Return command results or errors
-
-### Key Components
-
-#### AccessibilityService
-- Reads UI hierarchy using Android accessibility APIs
-- Performs gestures via `GestureDescription`
-- Handles text input to focused elements
-- Manages system navigation (back, home, recents)
-
-#### ScreenCaptureService
-- Uses MediaProjection for screen recording permission
-- Captures screenshots via ImageReader
-- Converts images to base64 PNG format
-- Runs as foreground service for continuous availability
-
-#### NodeConnectionService
-- Maintains WebSocket connection to gateway
-- Handles OpenClaw protocol messages
-- Routes commands to appropriate handlers
-- Manages device pairing and authentication
 
 ## Security
 
@@ -167,29 +146,10 @@ The node implements the OpenClaw WebSocket protocol v3:
    - Review app logs for error messages
    - Test basic connectivity with gateway
 
-### Performance
-
-- Screen capture resolution can be adjusted for faster transmission
-- UI tree queries may be slow on complex layouts
-- WebSocket connection uses heartbeat to maintain connection
-- Services run in foreground to prevent battery optimization killing
-
 ### Debugging
 
 Enable debug logging and check Android Studio Logcat:
 
 ```bash
-adb logcat | grep -E "(OpenClaw|NodeConnection|ScreenCapture|AccessibilityService)"
+adb logcat | grep -E "(BillBot|NodeConnection|ScreenCapture|AccessibilityService)"
 ```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test on real device
-5. Submit a pull request
-
-## License
-
-This project is part of the OpenClaw ecosystem. See the main OpenClaw repository for licensing information.

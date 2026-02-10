@@ -1,10 +1,10 @@
-package com.openclaw.node.utils
+package com.billbot.node.utils
 
 import android.content.Context
 import android.os.Build
 import android.provider.Settings
 import android.util.Base64
-import com.openclaw.node.models.DeviceInfo
+import com.billbot.node.models.DeviceInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.bouncycastle.jce.provider.BouncyCastleProvider
@@ -66,7 +66,7 @@ object CryptoUtils {
     }
     
     private fun getOrCreateKeyPair(context: Context): KeyPair {
-        val sharedPrefs = context.getSharedPreferences("openclaw_crypto", Context.MODE_PRIVATE)
+        val sharedPrefs = context.getSharedPreferences("billbot_crypto", Context.MODE_PRIVATE)
         
         // Try to load existing keypair
         val privateKeyString = sharedPrefs.getString("private_key", null)
